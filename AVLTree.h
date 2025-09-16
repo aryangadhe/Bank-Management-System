@@ -2,7 +2,7 @@
 #define AVLTREE_H
 
 #include "Account.h"
-#include <functional>   // for std::function
+#include <functional>  
 
 struct AVLNode {
     Account data;
@@ -17,7 +17,6 @@ class AVLTree {
 private:
     AVLNode* root;
 
-    // 🔹 Helper functions
     int height(AVLNode* node);
     int getBalance(AVLNode* node);
     AVLNode* rightRotate(AVLNode* y);
@@ -25,7 +24,6 @@ private:
     AVLNode* insert(AVLNode* node, const Account& acc);
     AVLNode* search(AVLNode* node, int id) const;
 
-    // 🔹 Traversal helper
     void inorderHelper(AVLNode* node, std::function<void(const Account&)> visit) const;
 
 public:
@@ -35,8 +33,13 @@ public:
     Account* search(int id);
     const Account* search(int id) const;
 
-    // 🔹 Traversal
     void inorderTraversal(std::function<void(const Account&)> visit) const;
+    void searchByBalance(AVLNode* node, double minBalance, vector<Account>& result) const;
+    void searchByName(AVLNode* node, const string& name, vector<Account>& result) const;
+
+    vector<Account> searchByBalance(double minBalance) const;
+    vector<Account> searchByName(const string& name) const;
+
 };
 
 #endif

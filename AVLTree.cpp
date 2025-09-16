@@ -108,3 +108,29 @@ void AVLTree::inorderHelper(AVLNode* node, function<void(const Account&)> visit)
 void AVLTree::inorderTraversal(function<void(const Account&)> visit) const {
     inorderHelper(root, visit);
 }
+
+vector<Account> AVLTree::searchByBalance(double minBalance) const{
+    vector<Account> result;
+    searchByBalance(root, minBalance, result);
+    return result;
+}
+
+void AVLTree::searchByBalance(AVLNode* node, double minBalance, vector<Account>& result) const {
+    if(!node) return;
+    if(node -> data.getBalance() >= minBalance) result.push_back(node -> data);
+    searchByBalance(node -> left, minBalance, result);
+    searchByBalance(node -> right, minBalance, result);
+}
+
+vector<Account> AVLTree::searchByName(const string& name) const{
+    vector<Account> result;
+    searchByName(root, name, result);
+    return result;
+}
+
+void AVLTree::searchByName(AVLNode* node, const string& name, vector<Account>& result) const{
+    if(!node) return;
+    if(node -> data.getName() == name) result.push_back(node -> data);
+    searchByName(node -> left, name, result);
+    searchByName(node -> right, name, result);
+}
