@@ -1,4 +1,5 @@
 #include "Bank.h"
+#include "Utils.h"
 #include <iostream>
 using namespace std;
 
@@ -10,11 +11,11 @@ void Bank::createAccount(string name, int pin, double initialDeposit) {
     nextAccountId++;
 }
 
+
 bool Bank::verifyPinInternal(const Account& acc) const {
-    int inputPin;
+    string inputPin = Utils::getHiddenPin();
     cout << "Enter PIN: ";
-    cin >> inputPin;
-    return inputPin == acc.getPin();
+    return stoi(inputPin) == acc.getPin();
 }
 
 void Bank::deposit(int id, double amount) {
