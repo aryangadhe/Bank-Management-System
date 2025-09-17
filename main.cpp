@@ -7,8 +7,8 @@ int main() {
     Bank bank;
 
     // Load data at start
-    FileManager::loadAccounts(bank.getAccountsTree(), "accounts.txt");
-    FileManager::loadTransactions(bank.getAccountsTree(), "transactions.txt");
+    FileManager::loadAccounts(bank.getAccountsTree(), "accounts.csv");
+    FileManager::loadTransactions(bank.getAccountsTree(), "transactions.csv");
     bank.updateNextAccountId();
 
     int choice;
@@ -116,7 +116,6 @@ int main() {
                         cin >> ws;
                         getline(cin, name);
                         bank.searchByName(name);
-                        break;
                     }
                     else if(adminChoice == 2){
                         double minBal, maxBal;
@@ -124,7 +123,7 @@ int main() {
                         cin >> minBal;
                         cout << "Enter maximum balance: ";
                         cin >> maxBal;
-                        bank.searchByBalance(minBal, maxBal);
+                        bank.searchByBalance(minBal);
                     }
                     else if(adminChoice == 3){
                         int id;
@@ -161,8 +160,8 @@ int main() {
         
         else if (choice == 4) {
             // Save before exit
-            FileManager::saveAccounts(bank.getAccountsTree(), "accounts.txt");
-            FileManager::saveTransactions(bank.getAccountsTree(), "transactions.txt");
+            FileManager::saveAccounts(bank.getAccountsTree(), "accounts.csv");
+            FileManager::saveTransactions(bank.getAccountsTree(), "transactions.csv");
             cout << "Data saved. Exiting...\n";
             break;
         }

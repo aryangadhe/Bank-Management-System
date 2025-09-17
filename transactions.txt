@@ -1,9 +1,0 @@
-AccountID,Type,Amount,Timestamp
-1,Withdraw,2545,"Wed Sep 17 14:59:55 2025"
-1,Deposit,1245,"Wed Sep 17 14:59:55 2025"
-1,Deposit,12345,"Wed Sep 17 14:59:55 2025"
-1,Withdraw,12345,"Wed Sep 17 14:59:55 2025"
-1,Deposit,12847,"Wed Sep 17 14:59:55 2025"
-2,Deposit,1248,"Wed Sep 17 14:59:55 2025"
-2,Withdraw,12345,"Wed Sep 17 14:59:55 2025"
-5,Withdraw,12847,"Wed Sep 17 14:59:55 2025"

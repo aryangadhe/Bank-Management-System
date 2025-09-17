@@ -4,7 +4,8 @@
 #include "Account.h"
 #include <functional>  
 
-struct AVLNode {
+class AVLNode {
+    public:
     Account data;
     AVLNode* left;
     AVLNode* right;
@@ -17,7 +18,7 @@ class AVLTree {
 private:
     AVLNode* root;
 
-    int height(AVLNode* node);
+    int height(AVLNode* node);  
     int getBalance(AVLNode* node);
     AVLNode* rightRotate(AVLNode* y);
     AVLNode* leftRotate(AVLNode* x);

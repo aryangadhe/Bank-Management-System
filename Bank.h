@@ -39,11 +39,10 @@ public:
 
     void fundTransfer(int from, int to, double amount);
     void showMiniStatement(int id, int count = 5) const;
-    void downloadStatement(int id, const string& filename) const;
     vector<Account> getAccountsByBalance(double minBalance) const;
     vector<Account> getAccountsByName(const string& name) const;
     void searchByName(const string& name) const;
-    void searchByBalance(double minBalance, double maxBalance) const;
+    void searchByBalance(double minBalance) const;
 
 };
 

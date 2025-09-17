@@ -14,12 +14,14 @@ public:
     Transaction* next;  // pointer to the next transaction (for linked list)
 
     // Constructor
+
     Transaction(int id, string s, double a, string t);
 
     void display() const;
     string getType() const;
     double getAmount() const;
     string getTimeStamp() const;
+    int getTransactionId() const;
 };
 
 #endif

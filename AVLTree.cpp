@@ -2,7 +2,6 @@
 #include <algorithm>
 using namespace std;
 
-// ================= Height & Balance =================
 int AVLTree::height(AVLNode* node) {
     return node ? node->height : 0;
 }
@@ -11,7 +10,6 @@ int AVLTree::getBalance(AVLNode* node) {
     return node ? height(node->left) - height(node->right) : 0;
 }
 
-// ================= Rotations =================
 AVLNode* AVLTree::rightRotate(AVLNode* y) {
     AVLNode* x = y->left;
     AVLNode* T2 = x->right;
@@ -38,7 +36,6 @@ AVLNode* AVLTree::leftRotate(AVLNode* x) {
     return y;
 }
 
-// ================= Insert =================
 AVLNode* AVLTree::insert(AVLNode* node, const Account& acc) {
     if (!node) return new AVLNode(acc);
 
@@ -47,7 +44,7 @@ AVLNode* AVLTree::insert(AVLNode* node, const Account& acc) {
     else if (acc.getId() > node->data.getId())
         node->right = insert(node->right, acc);
     else
-        return node; // Duplicate not allowed
+        return node; 
 
     node->height = 1 + max(height(node->left), height(node->right));
 
@@ -76,7 +73,6 @@ void AVLTree::insert(const Account& acc) {
     root = insert(root, acc);
 }
 
-// ================= Search =================
 AVLNode* AVLTree::search(AVLNode* node, int id) const {
     if (!node || node->data.getId() == id)
         return node;
@@ -97,7 +93,6 @@ const Account* AVLTree::search(int id) const {
     return node ? &node->data : nullptr;
 }
 
-// ================= Traversal =================
 void AVLTree::inorderHelper(AVLNode* node, function<void(const Account&)> visit) const {
     if (!node) return;
     inorderHelper(node->left, visit);

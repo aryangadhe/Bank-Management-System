@@ -1,18 +1,9 @@
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
+#include "Transaction.h"
 
 #include <bits/stdc++.h>
 using namespace std;
-
-struct Transaction {
-    int transactionId;
-    string type;
-    double amount;
-    string timestamp;
-    Transaction* next;
-
-    Transaction(int id, const string& t, double amt, const string& ts);
-};
 
 class Account {
 private:
@@ -34,7 +25,6 @@ public:
     void display() const;
     void showAllTransactions() const;
 
-    // Needed by FileManager
     Transaction* getHead() const;
     void addTransaction(const string& type, double amount);
 

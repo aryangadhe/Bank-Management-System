@@ -4,7 +4,6 @@
 #include <sstream>
 using namespace std;
 
-// ================= SAVE ACCOUNTS =================
 void FileManager::saveAccounts(const AVLTree &accounts, const string &filename) {
     ofstream outFile(filename);
     if (!outFile) {
@@ -13,7 +12,7 @@ void FileManager::saveAccounts(const AVLTree &accounts, const string &filename) 
     }
 
     // Write header
-    outFile << "ID,Name,Balance,Pin\n";
+    outFile << "ID, Name, Balance, Pin\n";
 
     accounts.inorderTraversal([&](const Account &acc) {
         outFile << acc.getId() << ","
@@ -25,7 +24,6 @@ void FileManager::saveAccounts(const AVLTree &accounts, const string &filename) 
     outFile.close();
 }
 
-// ================= LOAD ACCOUNTS =================
 void FileManager::loadAccounts(AVLTree &accounts, const string &filename) {
     ifstream inFile(filename);
     if (!inFile) {
@@ -63,7 +61,6 @@ void FileManager::loadAccounts(AVLTree &accounts, const string &filename) {
 }
 
 
-// ================= SAVE TRANSACTIONS =================
 void FileManager::saveTransactions(const AVLTree &accounts, const string &filename) {
     ofstream outFile(filename);
     if (!outFile) {
@@ -71,12 +68,13 @@ void FileManager::saveTransactions(const AVLTree &accounts, const string &filena
         return;
     }
 
-    outFile << "AccountID,Type,Amount,Timestamp\n";
+    outFile << "AccountID, TransactionID, Type, Amount, Timestamp\n";
 
     accounts.inorderTraversal([&](const Account &acc) {
         Transaction* txn = acc.getHead();
         while (txn) {
             outFile << acc.getId() << ","
+                    << txn -> transactionId << ","
                     << txn->type << ","
                     << txn->amount << ","
                     << "\"" << txn->timestamp << "\""  // wrap timestamp
@@ -88,7 +86,6 @@ void FileManager::saveTransactions(const AVLTree &accounts, const string &filena
     outFile.close();
 }
 
-// ================= LOAD TRANSACTIONS =================
 void FileManager::loadTransactions(AVLTree &accounts, const string &filename) {
     ifstream inFile(filename);
     if (!inFile) {
@@ -101,9 +98,10 @@ void FileManager::loadTransactions(AVLTree &accounts, const string &filename) {
 
     while (getline(inFile, line)) {
         stringstream ss(line);
-        string idStr, type, amountStr, timestamp;
+        string idStr, idTStr, type, amountStr, timestamp;
 
         getline(ss, idStr, ',');
+        getline(ss, idTStr, ',');
         getline(ss, type, ',');
         getline(ss, amountStr, ',');
         getline(ss, timestamp, ',');
@@ -118,7 +116,7 @@ void FileManager::loadTransactions(AVLTree &accounts, const string &filename) {
 
         Account *acc = accounts.search(accountId);
         if (acc) {
-            acc->addTransaction(type, amount);  // timestamp not stored in linked list currently
+            acc->addTransaction(type, amount);  
         }
     }
 

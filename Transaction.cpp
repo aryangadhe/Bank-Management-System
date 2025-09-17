@@ -14,7 +14,7 @@ Transaction::Transaction(int id, string s, double a, string t) {
 // Display function
 void Transaction::display() const {
     cout << "----------------------------------" << endl;
-    cout << "Transaction ID: " << transactionId << endl;
+    cout << "Transaction Id: " << transactionId << endl;
     cout << "Type          : " << type << endl;
     cout << "Amount        : " << amount << endl;
     cout << "Timestamp     : " << timestamp << endl;
@@ -25,3 +25,4 @@ void Transaction::display() const {
 string Transaction::getType() const { return type; }
 double Transaction::getAmount() const { return amount; }
 string Transaction::getTimeStamp() const { return timestamp; }
+int Transaction::getTransactionId() const { return transactionId; }

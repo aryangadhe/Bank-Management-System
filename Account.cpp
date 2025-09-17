@@ -3,11 +3,7 @@
 #include <iostream>
 using namespace std;
 
-// ================= Transaction =================
-Transaction::Transaction(int id, const string& t, double amt, const string& ts)
-    : transactionId(id), type(t), amount(amt), timestamp(ts), next(nullptr) {}
 
-// ================= Account =================
 Account::Account() : accountId(0), name(""), balance(0.0), pin(0), head(nullptr), nextTransactionId(1) {}
 
 Account::Account(int id, const string& n, int p, double b)
@@ -56,7 +52,6 @@ void Account::showAllTransactions() const {
     }
 }
 
-// ================= FileManager helpers =================
 Transaction* Account::getHead() const { return head; }
 
 void Account::addTransaction(const string& type, double amount) {
@@ -65,7 +60,6 @@ void Account::addTransaction(const string& type, double amount) {
     head = txn;
 }
 
-// ================= Getters =================
 int Account::getId() const { return accountId; }
 string Account::getName() const { return name; }
 double Account::getBalance() const { return balance; }

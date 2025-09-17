@@ -13,15 +13,15 @@ void Bank::createAccount(string name, int pin, double initialDeposit) {
 
 
 bool Bank::verifyPinInternal(const Account& acc) const {
-    string inputPin = Utils::getHiddenPin();
     cout << "Enter PIN: ";
+    string inputPin = Utils::getHiddenPin();
     return stoi(inputPin) == acc.getPin();
 }
 
 void Bank::deposit(int id, double amount) {
     Account* acc = accounts.search(id);
     if (acc){
-        acc->deposit(amount);
+        acc -> deposit(amount);
         cout << "Successfully Deposited amount " << amount << endl;
     } 
     else cout << "No account found for ID " << id << endl;
@@ -39,7 +39,7 @@ void Bank::withdraw(int id, double amount) {
 void Bank::showAccount(int id) const {
     const Account* acc = accounts.search(id);
     if (acc) {
-        if (!const_cast<Bank*>(this)->verifyPinInternal(*acc)) return;
+        if (!const_cast<Bank*>(this)->verifyPinInternal(*acc)) return; //convert const to non const
         acc->display();
     } else {
         cout << "No account found for ID " << id << endl;
@@ -91,7 +91,7 @@ void Bank::fundTransfer(int fromId, int toId, double amount){
         cout << "Please Enter Valid Amount." << endl;
         return;
     }
-    if (fromAcc && toAcc && verifyPinInternal(*fromAcc) && verifyPinInternal(*toAcc)) {
+    if (fromAcc && toAcc && verifyPinInternal(*fromAcc)) {
         fromAcc->withdraw(amount);
         toAcc->deposit(amount);
         cout << "Fund transfer successful.\n";
@@ -165,14 +165,14 @@ void Bank::searchByName(const string& name) const {
 }
 
 // ================= Search by Balance =================
-void Bank::searchByBalance(double minBalance, double maxBalance) const {
+void Bank::searchByBalance(double minBalance) const {
     cout << "Searching for accounts with balance between "
-         << minBalance << " and " << maxBalance << "\n";
+         << minBalance << "\n";
     bool found = false;
 
     accounts.inorderTraversal([&](const Account& acc) {
         double bal = acc.getBalance();
-        if (bal >= minBalance && bal <= maxBalance) {
+        if (bal >= minBalance) {
             acc.display();
             found = true;
         }
